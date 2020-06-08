@@ -7,35 +7,35 @@ cities.push({
 })
 
 cities.push({
-    name: "Otlukbeli",
+    name: "Gvarv",
     latitude: 59.4,
     longitude :9.22
 })
 
 cities.push({
-    name :"Gvarv",
+    name: "Otlukbeli",
     latitude: 40,
     longitude : 40
 })
 cities.push({
-    name :"Adré",
+    name :"Moyale",
     latitude: 4,
     longitude : 40
 })
 cities.push({
-    name :"Moyale",
+    name :"Adré",
     latitude: 13,
     longitude : 22
 })
 cities.push({
-    name :"Gvarv",
+    name :"Ndelele",
     latitude: 4,
     longitude : 15
 })
 
 
 const get = (latitude, longitude, onSuccess,onFail) => {
-    fetch(`https://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=94732983488740c7ac18361880e08e1d`)
+    fetch(`https://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=dbd7b0db1f754da892e45e98bca2f4f5`)
     .then((response) =>response.json())
     .then((myJson) => {
         onSuccess(myJson)
@@ -106,22 +106,21 @@ cities.forEach(element => {
 const submitBtn = document.querySelector("button");
 
 const evaluate = (event) =>{
-    const containerBox = document.querySelector(".container");
-    
-    const inputUser = document.querySelector("input");
-    console.log("hola, estas presionando el boton correcto y el valor de input user es ", inputUser.value);
-    
     event.preventDefault();
+    const containerBox = document.querySelector(".container");
+    containerBox.remove();
+
+    const newContainer = document.createElement('div');
+    newContainer.className = "container";
+    document.body.appendChild(newContainer);
+
+    const inputUser = document.querySelector("input");    
+    
     const citiesSearch = cities.filter((element)=>{
-        
-        
-        console.log(`Hola aqui tienes element.name ${element.name} y ademas tines el valor del input ${inputUser.value}`);
-        console.log(element.name.includes(inputUser.value));
         
         return element.name.includes(inputUser.value);
         
     })
-    console.log(citiesSearch);
     
     citiesSearch.forEach(element =>{
         get(element.latitude,element.longitude,onSuccess,onFail);
